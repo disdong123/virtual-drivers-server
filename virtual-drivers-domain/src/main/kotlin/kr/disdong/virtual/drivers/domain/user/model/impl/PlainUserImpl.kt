@@ -2,7 +2,7 @@ package kr.disdong.virtual.drivers.domain.user.model.impl
 
 import kr.disdong.virtual.drivers.domain.user.model.PlainUser
 
-class PlainUserJpaImpl(
+class PlainUserImpl(
     override val id: Long = 0,
     override var name: String,
     override val phone: String
