@@ -1,8 +1,10 @@
 package kr.disdong.virtual.drivers.domain.drivingdirection.model
 
+import java.math.BigDecimal
+
 data class Position(
-    val latitude: Double,
-    val longitude: Double,
+    val latitude: BigDecimal,
+    val longitude: BigDecimal,
 )
 
 data class Duration(

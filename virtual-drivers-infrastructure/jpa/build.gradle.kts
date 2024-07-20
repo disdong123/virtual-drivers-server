@@ -4,6 +4,7 @@ plugins {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json")
     api(libs.spring.boot.starter.data.jpa)
     implementation(libs.querydsl.jpa) {
         artifact {
