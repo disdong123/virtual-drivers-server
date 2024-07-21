@@ -5,7 +5,7 @@ import kr.disdong.virtual.drivers.domain.drivingdirection.model.Position
 import kr.disdong.virtual.drivers.infrastructure.jpa.domain.drivingdirection.model.DrivingDirectionEntity
 import java.time.ZonedDateTime
 
-class DrivingDirectionJpaImpl(
+class DrivingDirectionImpl(
     private val entity: DrivingDirectionEntity,
 ) : DrivingDirection {
     override fun finish() {

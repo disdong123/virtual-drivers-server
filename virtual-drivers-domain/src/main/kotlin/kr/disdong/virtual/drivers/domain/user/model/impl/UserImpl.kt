@@ -3,7 +3,7 @@ package kr.disdong.virtual.drivers.domain.user.model.impl
 import kr.disdong.virtual.drivers.domain.user.model.User
 import kr.disdong.virtual.drivers.infrastructure.jpa.domain.user.model.UserEntity
 
-class UserJpaImpl(
+class UserImpl(
     private val entity: UserEntity,
 ) : User {
 

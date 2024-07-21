@@ -18,14 +18,14 @@ class CarEntity(
         unique = false,
         length = 45,
     )
-    val carName: String,
+    val name: String,
 
     @Column(
         nullable = false,
         unique = true,
         length = 20,
     )
-    val carNumber: String,
+    val number: String,
 
     @Column(
         nullable = false,
