@@ -1,6 +1,7 @@
 dependencies {
     implementation(project(":virtual-drivers-common"))
     implementation(project(":virtual-drivers-infrastructure:jpa"))
+    implementation(project(":virtual-drivers-infrastructure:client"))
 }
 
 val testJar by tasks.registering(Jar::class) {
