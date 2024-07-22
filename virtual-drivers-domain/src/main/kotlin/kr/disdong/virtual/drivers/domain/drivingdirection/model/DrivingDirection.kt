@@ -19,4 +19,5 @@ interface DrivingDirectionData {
     val distance: Int
     val duration: Int
     val carId: Long
+    // val routes: List<PlainDrivingDirectionRoute>
 }

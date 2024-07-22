@@ -40,3 +40,6 @@ out/
 node_modules
 .jqwik-database
 infra/mysql/data
+
+#
+client.yaml

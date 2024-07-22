@@ -21,3 +21,11 @@ open class NotFoundException(
         return HttpStatus.NOT_FOUND
     }
 }
+
+open class BadRequestException(
+    override val message: String,
+) : TemplateException(message) {
+    override fun getCode(): HttpStatus {
+        return HttpStatus.BAD_REQUEST
+    }
+}

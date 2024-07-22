@@ -2,9 +2,10 @@ package kr.disdong.virtual.drivers.infrastructure.client.domain.drivingdirection
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import kr.disdong.virtual.drivers.common.exception.NotFoundException
+import java.math.BigDecimal
 import java.time.ZonedDateTime
 
-data class DrivingDirectionResponse(
+data class DrivingDirectionApiResponse(
     val code: Int,
     val message: String,
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
@@ -16,7 +17,7 @@ data class DrivingDirectionResponse(
     ) {
         data class RouteData(
             val summary: Summary,
-            val path: List<List<Double>>,
+            val path: List<List<BigDecimal>>,
         )
 
         data class Summary(
@@ -26,14 +27,14 @@ data class DrivingDirectionResponse(
             val duration: Int,
             @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
             val departureTime: ZonedDateTime,
-            val bbox: List<List<Double>>,
+            val bbox: List<List<BigDecimal>>,
             val tollFare: Int,
             val taxiFare: Int,
             val fuelPrice: Int,
         ) {
 
             data class LocationSummary(
-                val location: List<Double>,
+                val location: List<BigDecimal>,
             )
         }
     }

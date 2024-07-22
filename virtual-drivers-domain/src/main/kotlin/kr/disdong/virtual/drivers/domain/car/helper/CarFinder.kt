@@ -11,6 +11,11 @@ import org.springframework.transaction.annotation.Transactional
 class CarFinder(
     private val carJpaRepository: CarJpaRepository,
 ) {
+
+    fun findNoDrivingCar(): Car? {
+        return carJpaRepository.findNoDrivingCar()?.toCar()
+    }
+
     fun findAll(): List<Car> {
         return carJpaRepository.findAll().map { it.toCar() }
     }

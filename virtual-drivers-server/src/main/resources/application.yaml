@@ -1,12 +1,20 @@
-server:
-  servlet:
-    context-path: /api
+#server:
+#  servlet:
+#    context-path: /api
 
 spring:
   config:
     import:
       - domain.yaml
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
 
 springdoc:
   swagger-ui:
     path: /docs
+
+---
+spring.config.activate.on-profile: default, local, dev
+---
+spring.config.activate.on-profile: prod

@@ -1,0 +1,158 @@
+<html>
+  <head>
+    <style>
+      .keyword_label {
+        display: none;
+      }
+      .container {
+        display: flex;
+        margin: 0 5% 0 0; /* 오른쪽 여백 제거, 왼쪽 여백 5% */
+      }
+      .address-inputs {
+        flex: 0 0 30%; /* 너비 30% 고정 */
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin: 0;
+      }
+      .address-inputs .postcodify_search_controls {
+        margin: 0;
+        border-bottom: 1px solid #ddd;
+      }
+      .address-inputs .postcodify_search_form {
+        margin: 0;
+      }
+      .address-inputs input {
+        padding: 12px 8px;
+        border: 0;
+        width: calc(100% - 50px);
+        margin: 0;
+      }
+      .search_button {
+        float: none;
+        position: static;
+        padding: 12px 10px;
+        border: 0;
+        border-left: 1px solid #aaaa;
+        color: #222;
+        font-size: 14px;
+        margin-left: -1px;
+        font-weight: bold;
+        box-sizing: border-box;
+        width: 50px;
+        background: #fff;
+      }
+      .address-input-wrapper {
+        margin: 0;
+        border: 1px solid #666;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      .address-inputs label {
+        margin-right: 10px;
+        font-weight: bold;
+      }
+      .map-container {
+        flex: 0 0 70%; /* 너비 70% 고정 */
+        padding: 10px;
+      }
+      .search-full-button {
+        width: 100%;
+        font-size: 14px;
+        background: #b0addb;
+        padding: 15px 0;
+        border: 0;
+        margin-top: 20px;
+      }
+    </style>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+  </head>
+  <body>
+    <h1>지도 테스트</h1>
+
+    <div class="container">
+      <!-- 주소 입력 부분 -->
+      <div class="address-inputs">
+        <div class="address-input-wrapper">
+          <div id="start_address_search" class="address-input"></div>
+          <div id="start_address"></div>
+          <div id="end_address_search" class="address-input"></div>
+          <div id="end_address"></div>
+        </div>
+        <button id="direction_button" class="search_button search-full-button">
+          길찾기
+        </button>
+      </div>
+
+      <!-- 지도 부분 -->
+      <div class="map-container">
+        <div id="map" style="width: 100%; height: 400px"></div>
+      </div>
+    </div>
+    <div>
+      <div id="connect">connection</div>
+      <div id="disconnect">disconnection</div>
+    </div>
+
+    <script
+      type="text/javascript"
+      th:src="@{${'https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=' + clientId}}"
+    ></script>
+    <script th:inline="javascript" th:src="@{/js/NaverMap.js}"></script>
+    <script
+      th:inline="javascript"
+      th:src="@{/js/PositionStompClient.js}"
+    ></script>
+    <script th:inline="javascript">
+      let startPosition = null;
+      let endPosition = null;
+      let markers = [];
+      const map = new NaverMap();
+      const stompClient = new PositionStompClient(map, markers);
+
+      $('#connect').on('click', () => {
+        stompClient.activate();
+      });
+
+      $('#disconnect').on('click', () => {
+        stompClient.deactivate();
+      });
+
+      $(function () {
+        searchAddress('#start_address_search', '#start_address', 'start');
+        searchAddress('#end_address_search', '#end_address', 'end');
+      });
+
+      $('#direction_button').on('click', () => {
+        if (startPosition === null || endPosition === null) {
+          alert('출발지와 도착지를 입력해주세요.');
+          return;
+        }
+
+        map.getDirection(startPosition, endPosition);
+      });
+
+      const searchAddress = (searchTagId, textTagId, type) => {
+        $(searchTagId).postcodify({
+          beforeSearch: function (data) {
+            $('#entry_box').hide();
+          },
+          afterSelect: function (data) {
+            $(`${searchTagId} div.postcode_search_result`).remove();
+            $(`${searchTagId} div.postcode_search_status.summary`).hide();
+            $(textTagId).text(data.prevObject.context.innerText);
+
+            map.setCenterWithAddress(
+              data.prevObject.context.innerText,
+              type,
+              markers,
+            );
+          },
+        });
+      };
+    </script>
+  </body>
+</html>

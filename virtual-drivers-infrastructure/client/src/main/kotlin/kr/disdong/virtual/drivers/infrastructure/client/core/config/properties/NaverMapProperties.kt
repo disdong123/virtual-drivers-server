@@ -1,4 +1,4 @@
-package kr.disdong.virtual.drivers.infrastructure.client.properties
+package kr.disdong.virtual.drivers.infrastructure.client.core.config.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.bind.ConstructorBinding

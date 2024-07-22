@@ -5,7 +5,11 @@ import java.math.BigDecimal
 data class Position(
     val latitude: BigDecimal,
     val longitude: BigDecimal,
-)
+) {
+    override fun toString(): String {
+        return "$longitude,$latitude"
+    }
+}
 
 data class Duration(
     val value: Int,

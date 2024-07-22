@@ -1,6 +1,6 @@
-package kr.disdong.virtual.drivers.infrastructure.client.config
+package kr.disdong.virtual.drivers.infrastructure.client.core.config
 
-import kr.disdong.virtual.drivers.infrastructure.client.properties.NaverMapProperties
+import kr.disdong.virtual.drivers.infrastructure.client.core.config.properties.NaverMapProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.client.RestClient
